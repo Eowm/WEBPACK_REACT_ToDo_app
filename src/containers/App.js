@@ -1,13 +1,31 @@
 import React from 'react';
 import uuid from 'uuid';
-import style from './App.css'
+import style from './App.css';
+import TodoList from '../components/TodoList';
+import TodoForm from '../components/TodoForm';	
+import Title from '../components/Title';
+import { hot } from 'react-hot-loader';
 
 class App extends React.Component {
 	constructor(props){
 		super(props);
-		this.state= {
-			data:[]
-		};
+		this.state = {
+      		data: [{
+        		id: 1,
+        		text: 'clean room'
+      		}, 
+      		{
+      		  id: 2,
+      		  text: 'wash the dishes'
+      		}, 
+      		{
+      		  id: 3,
+      		  text: 'feed my cat'
+      		}]
+    	};
+    	this.addTodo = this.addTodo.bind(this);
+        this.removeTodo = this.removeTodo.bind(this);
+        this.updateValue = this.updateValue.bind(this);
 	}
 
 	addTodo(val) {
@@ -24,13 +42,21 @@ class App extends React.Component {
 		this.setState({data: reminder});
 	}
 
+	updateValue(newValue) {
+		this.setState({
+			value: newValue
+		});
+	}
+
 	render() {
 		return(
 			<div className={style.TodoApp}>
-				Tutaj pojawią się komponenty naszej apki
+				<Title title='Lista ToDo' length={this.state.data.length} />
+				<TodoForm add={this.addTodo} updateValue={this.updateValue} value={this.state.value}/>
+				<TodoList list={this.state.data} remove={this.removeTodo.bind(this)} />
 			</div>
 			);
 	}
 }
 
-export default App;
+export default hot(module)(App);
