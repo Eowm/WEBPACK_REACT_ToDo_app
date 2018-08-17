@@ -1,12 +1,12 @@
 import React from 'react';
+import style from './TodoForm.css'
 
 const TodoForm = props => (
-			<form onSubmit={props.add(props.value)}>
-				<label>What do you need to do?
-					<input type="text" value={props.value} onChange={(ev) => props.updateValue(ev.target.value)} />
-				</label>
-				<input type="submit" value="Submit" />
-			</form>
-	)
+    <form action=''>
+        <label htmlFor='task'>What do you have to do?</label>
+        <input onChange={(ev) => props.change(ev.target.value)} type='text' id='task' value={props.value}/>
+        <button onClick={(ev) => props.add(ev, props.value)}>Add task to list!</button>
+    </form>
+);
 
 	export default TodoForm;

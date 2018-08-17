@@ -1,0 +1,24 @@
+form {
+	font-size: 26px;
+	font-weight: 700;
+	padding: 10px 20px;
+	color: #00255C;
+}
+
+
+button {
+	width: 200px;
+	height: 40px;
+	margin: 5px;
+	cursor: pointer;
+	font-size: 18px;
+}
+
+
+
+input {
+	width: 240px;
+	height: 34px;
+	margin-left: 20px;
+	font-size: 18px;
+}

@@ -21,20 +21,24 @@ class App extends React.Component {
       		{
       		  id: 3,
       		  text: 'feed my cat'
-      		}]
+      		}],
+      		value: ''
     	};
     	this.addTodo = this.addTodo.bind(this);
         this.removeTodo = this.removeTodo.bind(this);
-        this.updateValue = this.updateValue.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 	}
 
-	addTodo(val) {
+	addTodo(ev, value) {
+		ev.preventDefault();
+		if(!value){
+			return}
 		const todo = {
-			text: val,
+			text: value,
 			id: uuid.v4(),
 		};
 		const data = [...this.state.data, todo];
-		this.setState({data});
+		this.setState({data, value: ''});
 	}
 
 	removeTodo(id) {
@@ -42,9 +46,9 @@ class App extends React.Component {
 		this.setState({data: reminder});
 	}
 
-	updateValue(newValue) {
+	handleChange(text) {
 		this.setState({
-			value: newValue
+			value: text
 		});
 	}
 
@@ -52,7 +56,7 @@ class App extends React.Component {
 		return(
 			<div className={style.TodoApp}>
 				<Title title='Lista ToDo' length={this.state.data.length} />
-				<TodoForm add={this.addTodo} updateValue={this.updateValue} value={this.state.value}/>
+				<TodoForm add={this.addTodo} value={this.state.value} change={this.handleChange}/>
 				<TodoList list={this.state.data} remove={this.removeTodo.bind(this)} />
 			</div>
 			);
